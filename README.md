@@ -2,9 +2,11 @@
 
 Website project for the Krishnam Vande Jagadgurum Telugu devotional learning community.
 
+Live site: https://m0k0ut.github.io/kvj-satsangam/
+
 ## Current phase
 
-The Astro MVP is implemented and ready for content and launch review. Telugu is the default language. English routes live under `/en/`. Registration uses a Google Apps Script web app to validate submissions and append them to the organizer's Google Sheet. The public site contains no Google credentials.
+The Astro MVP is live on GitHub Pages. Telugu is the default language. English routes live under `/en/`. Registration uses a Google Apps Script web app to validate submissions and append them to the organizer's Google Sheet. The public site contains no Google credentials.
 
 ## Working files
 

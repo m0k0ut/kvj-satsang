@@ -1,8 +1,8 @@
 # Launch Astro MVP Website
 
-Status: `in-review`
+Status: `complete`
 
-Nimbalyst phase: `validating`
+Nimbalyst phase: `completed`
 
 Suggested tags: `#website` `#astro` `#mvp` `#github-pages` `#bilingual` `#approval-required`
 
@@ -265,6 +265,8 @@ Done when:
 
 Review the complete release candidate in Nimbalyst. Only the user can approve public publication.
 
+Approved by the user on September 17, 2026. The approved release is live at https://m0k0ut.github.io/kvj-satsangam/.
+
 ### Work item 7: Publish through GitHub Pages
 
 Priority: high
@@ -286,6 +288,8 @@ Done when:
 - The public URL loads successfully.
 - Direct navigation and refresh work on all routes.
 - The deployed build matches the approved release candidate.
+
+Status: complete. GitHub Pages published the approved build on September 17, 2026.
 
 ### Work item 8: Maintenance handoff
 
