@@ -1,0 +1,58 @@
+---
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import socialImage from '../assets/krishna-with-flute.jpg';
+import { withBase } from '../lib/urls';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  locale?: 'te' | 'en';
+  image?: string;
+}
+
+const { title, description, locale = 'te', image = socialImage.src } = Astro.props;
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+const routePath = basePath && Astro.url.pathname.startsWith(basePath)
+  ? Astro.url.pathname.slice(basePath.length) || '/'
+  : Astro.url.pathname;
+const canonical = new URL(withBase(routePath), Astro.site);
+const alternatePath = locale === 'en'
+  ? routePath.replace(/^\/en(?=\/|$)/, '') || '/'
+  : `/en${routePath === '/' ? '/' : routePath}`;
+const alternate = new URL(withBase(alternatePath), Astro.site);
+const absoluteImage = new URL(withBase(image), Astro.site);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#21163f" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={locale === 'en' ? 'te' : 'en'} href={alternate} />
+    <link rel="alternate" hreflang="x-default" href={locale === 'en' ? alternate : canonical} />
+    <link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL}favicon.png`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locale === 'en' ? 'en_IN' : 'te_IN'} />
+    {image && <meta property="og:image" content={absoluteImage} />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {image && <meta name="twitter:image" content={absoluteImage} />}
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{locale === 'en' ? 'Skip to content' : 'ప్రధాన విషయానికి వెళ్లండి'}</a>
+    <SiteHeader locale={locale} />
+    <main id="main"><slot /></main>
+    <SiteFooter locale={locale} />
+  </body>
+</html>

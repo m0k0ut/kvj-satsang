@@ -1,0 +1,19 @@
+---
+import InteriorPage from '../components/InteriorPage.astro';
+import type { Locale, PageKey } from '../data/interior-copy';
+
+export function getStaticPaths() {
+  const pages: PageKey[] = ['programs', 'about', 'classes', 'gallery', 'resources', 'join', 'register'];
+  const routes = [];
+  for (const page of pages) {
+    routes.push({ params: { path: page }, props: { locale: 'te' as Locale, page } });
+    routes.push({ params: { path: `en/${page}` }, props: { locale: 'en' as Locale, page } });
+  }
+  return routes;
+}
+
+interface Props { locale: Locale; page: PageKey; }
+const { locale, page } = Astro.props;
+---
+
+<InteriorPage locale={locale} page={page} />

@@ -1,0 +1,16 @@
+---
+import { withBase } from '../lib/urls';
+
+interface Props {
+  compact?: boolean;
+  inverse?: boolean;
+  label?: string;
+}
+
+const { compact = false, inverse = false, label = 'Telegram' } = Astro.props;
+---
+
+<span class:list={['telegram-mark', { compact, inverse }]}>
+  <img src={withBase('/brand/telegram-logo.svg')} alt="" width={compact ? 22 : 44} height={compact ? 22 : 44} />
+  <span>{label}</span>
+</span>

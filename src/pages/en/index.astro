@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TelegramMark from '../../components/TelegramMark.astro';
+import heroImage from '../../assets/krishna-with-flute.jpg';
+import { withBase } from '../../lib/urls';
+
+const programs = [
+  ['01', 'Srimad Bhagavatam', 'Sequential study through stories, chapters, and verses.'],
+  ['02', 'Ramayanam and Sundarakanda', 'Sarga-based learning, recitation, and parayanam.'],
+  ['03', 'Narayaneeyam', 'Dashakam study, guided practice, and group recitation.'],
+];
+---
+
+<BaseLayout locale="en" title="Krishnam Vande Jagadgurum | Guided Telugu scripture learning" description="A Telugu devotional community for live scripture classes, guided recitation, revision, parayanam, and service.">
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> Live classes on Telegram</p>
+        <h1>Learn together.<br /><em>Practice together.</em></h1>
+        <p class="hero-lead">Guided Telugu study of the Bhagavatam, Ramayanam, Narayaneeyam, and Bhagavad Gita. One devotional community from reading to parayanam.</p>
+        <div class="hero-actions">
+          <a class="button" href={withBase('/en/programs/')}>Explore programs <span aria-hidden="true">→</span></a>
+          <a class="text-link" href={withBase('/en/classes/')}>How do classes work? <span aria-hidden="true">↗</span></a>
+        </div>
+        <dl class="hero-facts"><div><dt>Language</dt><dd>Telugu</dd></div><div><dt>Platform</dt><dd><TelegramMark compact /></dd></div><div><dt>Format</dt><dd>Live + practice</dd></div></dl>
+      </div>
+      <figure class="hero-art">
+        <div class="art-frame"><Image src={heroImage} alt="Krishna playing the flute in an Indian painting from the 1790s" width={900} quality={88} loading="eager" /><div class="art-wash"></div></div>
+        <figcaption><span>Krishna with the flute</span><a href="https://commons.wikimedia.org/wiki/File:Krishna_with_flute.jpg" rel="noreferrer">Smithsonian · Public domain</a></figcaption>
+      </figure>
+    </div>
+  </section>
+  <section class="marquee" aria-label="Satsangam experience"><div class="shell marquee-inner"><span>Listen</span><i>✦</i><span>Read</span><i>✦</i><span>Reflect</span><i>✦</i><span>Recite</span><i>✦</i><span>Serve</span></div></section>
+  <section class="section intro-section">
+    <div class="shell intro-grid"><div><p class="eyebrow">The satsangam experience</p><h2>From listening to daily practice</h2></div><p class="section-lead">Each class is part of a structured learning journey. Teacher guidance, study material, individual practice, and group revision turn scripture learning into a regular discipline.</p></div>
+    <div class="shell program-list">
+      {programs.map(([number, title, text]) => <article class="program-row"><span class="program-number">{number}</span><h3>{title}</h3><p>{text}</p><span class="program-arrow" aria-hidden="true">↗</span></article>)}
+    </div>
+  </section>
+  <section class="section cta-section"><div class="shell cta-card"><div><p class="eyebrow">Your learning journey</p><h2>Begin with the satsangam</h2><p>Live classes, announcements, and practice continue on Telegram. Organizers coordinate group access directly within the community.</p></div><a class="button button-light" href={withBase('/en/register/')}>Register interest <span aria-hidden="true">→</span></a></div></section>
+</BaseLayout>

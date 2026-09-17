@@ -1,0 +1,7 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/urls';
+---
+<BaseLayout title="పేజీ కనబడలేదు | కృష్ణం వందే జగద్గురుమ్" description="మీరు వెతుకుతున్న పేజీ కనబడలేదు.">
+  <section class="page-hero error-page"><div class="shell page-hero-inner"><p class="eyebrow">404</p><h1>ఈ పేజీ కనబడలేదు</h1><p>లింక్ మారి ఉండవచ్చు లేదా పేజీ ఇంకా ప్రచురించబడలేదు.</p><a class="button" href={withBase('/')}>హోమ్‌కు వెళ్లండి <span aria-hidden="true">→</span></a></div></section>
+</BaseLayout>

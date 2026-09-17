@@ -1,0 +1,31 @@
+---
+import { withBase } from '../lib/urls';
+
+interface Props {
+  locale?: 'te' | 'en';
+}
+
+const { locale = 'te' } = Astro.props;
+const isEnglish = locale === 'en';
+const root = isEnglish ? '/en/' : '/';
+---
+
+<footer class="site-footer">
+  <div class="shell footer-grid">
+    <div>
+      <p class="eyebrow">{isEnglish ? 'Hyderabad · Online' : 'హైదరాబాద్ · ఆన్‌లైన్'}</p>
+      <h2>{isEnglish ? 'Krishnam Vande Jagadgurum' : 'కృష్ణం వందే జగద్గురుమ్'}</h2>
+      <p>{isEnglish ? 'Guided Telugu scripture learning, practiced together.' : 'మార్గదర్శకత్వంతో తెలుగు శాస్త్ర అధ్యయనం, సామూహిక సాధన.'}</p>
+    </div>
+    <nav aria-label={isEnglish ? 'Footer navigation' : 'ఫుటర్ నావిగేషన్'}>
+      <a href={withBase(`${root}programs/`)}>{isEnglish ? 'Programs' : 'కార్యక్రమాలు'}</a>
+      <a href={withBase(`${root}resources/`)}>{isEnglish ? 'Resources' : 'వనరులు'}</a>
+      <a href={withBase(`${root}join/`)}>{isEnglish ? 'Join' : 'చేరండి'}</a>
+      <a href={withBase(`${root}register/`)}>{isEnglish ? 'Register' : 'నమోదు'}</a>
+    </nav>
+  </div>
+  <div class="shell footer-meta">
+    <span>© {new Date().getFullYear()} {isEnglish ? 'Krishnam Vande Jagadgurum Satsangam' : 'కృష్ణం వందే జగద్గురుమ్ సత్సంగం'}</span>
+    <span>{isEnglish ? 'Telugu-first devotional learning community' : 'తెలుగు ప్రధాన భక్తి అధ్యయన సమాజం'}</span>
+  </div>
+</footer>

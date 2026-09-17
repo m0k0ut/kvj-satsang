@@ -1,0 +1,14 @@
+- id: te
+  locale: te
+  organizationName: కృష్ణం వందే జగద్గురుమ్ సత్సంగం
+  informalName: కృష్ణం వందే జగద్గురుమ్
+  location: హైదరాబాద్, భారతదేశం
+  classPlatform: Telegram
+  timeZone: Asia/Kolkata
+- id: en
+  locale: en
+  organizationName: Krishnam Vande Jagadgurum Satsangam
+  informalName: Krishnam Vande Jagadgurum
+  location: Hyderabad, India
+  classPlatform: Telegram
+  timeZone: Asia/Kolkata

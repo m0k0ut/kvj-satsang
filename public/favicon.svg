@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="18" fill="#21163f"/>
+  <path d="M32 13c11 9 17 16 17 25a17 17 0 1 1-34 0c0-9 6-16 17-25Z" fill="#c8942f"/>
+  <circle cx="32" cy="38" r="10" fill="#fbf7ee"/>
+  <text x="32" y="43" text-anchor="middle" font-size="14" font-family="serif" fill="#21163f">కృ</text>
+</svg>

@@ -1,0 +1,8 @@
+- id: te
+  locale: te
+  status: announced-in-telegram
+  message: తరగతి విషయాలు, సమయాలను నిర్వాహకులు Telegram లో ప్రకటిస్తారు. అన్ని సమయాలు భారతీయ ప్రామాణిక కాలమానం ప్రకారం ఉంటాయి.
+- id: en
+  locale: en
+  status: announced-in-telegram
+  message: Organizers announce current class subjects and times in Telegram. All times use Indian Standard Time.

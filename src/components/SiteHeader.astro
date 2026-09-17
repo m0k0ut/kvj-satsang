@@ -1,0 +1,51 @@
+---
+import { withBase } from '../lib/urls';
+
+interface Props {
+  locale?: 'te' | 'en';
+}
+
+const { locale = 'te' } = Astro.props;
+const isEnglish = locale === 'en';
+const root = isEnglish ? '/en/' : '/';
+const labels = isEnglish
+  ? { programs: 'Programs', about: 'About', method: 'How classes work', gallery: 'Gallery', resources: 'Resources', join: 'Join', register: 'Register', language: 'తెలుగు', menu: 'Menu' }
+  : { programs: 'కార్యక్రమాలు', about: 'మా గురించి', method: 'తరగతుల విధానం', gallery: 'చిత్రాలు', resources: 'వనరులు', join: 'పాల్గొనండి', register: 'నమోదు', language: 'English', menu: 'మెనూ' };
+---
+
+<header class="site-header">
+  <div class="shell header-inner">
+    <a class="brand" href={withBase(root)} aria-label={isEnglish ? 'Krishnam Vande Jagadgurum home' : 'కృష్ణం వందే జగద్గురుమ్ హోమ్'}>
+      <img class="brand-emblem" src={withBase('/brand/kvj-emblem.png')} alt="" width="1254" height="1254" aria-hidden="true" />
+      <span class="brand-copy">
+        <strong lang="te">కృష్ణం వందే జగద్గురుమ్</strong>
+        <small lang="en">Krishnam Vande Jagadgurum</small>
+      </span>
+    </a>
+    <nav class="desktop-nav" aria-label={isEnglish ? 'Primary navigation' : 'ప్రధాన నావిగేషన్'}>
+      <a href={withBase(`${root}programs/`)}>{labels.programs}</a>
+      <a href={withBase(`${root}about/`)}>{labels.about}</a>
+      <a href={withBase(`${root}classes/`)}>{labels.method}</a>
+      <a href={withBase(`${root}gallery/`)}>{labels.gallery}</a>
+      <a href={withBase(`${root}resources/`)}>{labels.resources}</a>
+      <a href={withBase(`${root}join/`)}>{labels.join}</a>
+    </nav>
+    <details class="mobile-menu">
+      <summary>{labels.menu}</summary>
+      <nav aria-label={isEnglish ? 'Mobile navigation' : 'మొబైల్ నావిగేషన్'}>
+        <a href={withBase(`${root}programs/`)}>{labels.programs}</a>
+        <a href={withBase(`${root}about/`)}>{labels.about}</a>
+        <a href={withBase(`${root}classes/`)}>{labels.method}</a>
+        <a href={withBase(`${root}gallery/`)}>{labels.gallery}</a>
+        <a href={withBase(`${root}resources/`)}>{labels.resources}</a>
+        <a href={withBase(`${root}join/`)}>{labels.join}</a>
+        <a href={withBase(`${root}register/`)}>{labels.register}</a>
+        <a href={withBase(isEnglish ? '/' : '/en/')} lang={isEnglish ? 'te' : 'en'}>{labels.language}</a>
+      </nav>
+    </details>
+    <div class="header-actions">
+      <a class="language-link" href={withBase(isEnglish ? '/' : '/en/')} lang={isEnglish ? 'te' : 'en'}>{labels.language}</a>
+      <a class="button button-small" href={withBase(`${root}register/`)}>{labels.register}</a>
+    </div>
+  </div>
+</header>

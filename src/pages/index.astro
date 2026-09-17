@@ -1,0 +1,110 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TelegramMark from '../components/TelegramMark.astro';
+import heroImage from '../assets/krishna-with-flute.jpg';
+import { withBase } from '../lib/urls';
+
+const programs = [
+  { number: '01', title: 'శ్రీమద్భాగవతం', text: 'భాగవత కథ, శ్లోక పఠనం, అధ్యాయాల క్రమబద్ధ అధ్యయనం.' },
+  { number: '02', title: 'రామాయణం · సుందరకాండ', text: 'సర్గల వారీగా పఠనం, పారాయణం, పునశ్చరణ.' },
+  { number: '03', title: 'నారాయణీయం', text: 'దశకాల అధ్యయనం, మార్గదర్శక సాధన, సామూహిక పారాయణం.' },
+];
+
+const steps = [
+  ['వినండి', 'Telegram ప్రత్యక్ష తరగతిలో గురువు మార్గదర్శకత్వం పొందండి.'],
+  ['చదవండి', 'పంచుకున్న పాఠ్యాలు, ఆడియోలతో మీ సమయానికి సాధన చేయండి.'],
+  ['అభ్యసించండి', 'పునశ్చరణ, శ్లోక పఠనం, స్వర సాధన ద్వారా నేర్చుకోండి.'],
+  ['పంచుకోండి', 'పారాయణం, పండుగలు, అన్నదానం ద్వారా సేవలో భాగమవండి.'],
+];
+---
+
+<BaseLayout
+  title="కృష్ణం వందే జగద్గురుమ్ | తెలుగు భక్తి అధ్యయన సత్సంగం"
+  description="ప్రత్యక్ష తెలుగు తరగతులు, శాస్త్ర అధ్యయనం, పారాయణం, పునశ్చరణ, సేవతో కూడిన భక్తి సమాజం."
+>
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> Telegram ప్రత్యక్ష తరగతులు</p>
+        <h1>కలిసి నేర్చుకుందాం.<br /><em>కలిసి సాధన చేద్దాం.</em></h1>
+        <p class="hero-lead">భాగవతం, రామాయణం, నారాయణీయం, భగవద్గీతలో మార్గదర్శక తెలుగు అధ్యయనం. పఠనం నుండి పారాయణం వరకు ఒకే భక్తి సమాజం.</p>
+        <div class="hero-actions">
+          <a class="button" href={withBase('/programs/')}>కార్యక్రమాలు చూడండి <span aria-hidden="true">→</span></a>
+          <a class="text-link" href={withBase('/classes/')}>తరగతులు ఎలా జరుగుతాయి? <span aria-hidden="true">↗</span></a>
+        </div>
+        <dl class="hero-facts">
+          <div><dt>భాష</dt><dd>తెలుగు</dd></div>
+          <div><dt>వేదిక</dt><dd><TelegramMark compact /></dd></div>
+          <div><dt>విధానం</dt><dd>ప్రత్యక్షం + సాధన</dd></div>
+        </dl>
+      </div>
+      <figure class="hero-art">
+        <div class="art-frame">
+          <Image src={heroImage} alt="వేణువు వాయిస్తున్న శ్రీకృష్ణుడు, 1790ల భారతీయ చిత్రకళ" width={900} quality={88} loading="eager" />
+          <div class="art-wash"></div>
+        </div>
+        <figcaption>
+          <span>వేణుగోపాలుడు</span>
+          <a href="https://commons.wikimedia.org/wiki/File:Krishna_with_flute.jpg" rel="noreferrer">Smithsonian · Public domain</a>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="marquee" aria-label="సత్సంగం ముఖ్యాంశాలు">
+    <div class="shell marquee-inner">
+      <span>శ్రవణం</span><i>✦</i><span>పఠనం</span><i>✦</i><span>మననం</span><i>✦</i><span>పారాయణం</span><i>✦</i><span>సేవ</span>
+    </div>
+  </section>
+
+  <section class="section intro-section">
+    <div class="shell intro-grid">
+      <div>
+        <p class="eyebrow">సత్సంగం అనుభవం</p>
+        <h2>వినడం నుండి ఆచరణ వరకు</h2>
+      </div>
+      <p class="section-lead">ప్రతి తరగతి ఒక క్రమబద్ధమైన అధ్యయన యాత్రలో భాగం. గురువు వివరణ, పాఠ్య సహాయం, వ్యక్తిగత సాధన, సామూహిక పునశ్చరణ కలిసి నేర్చుకోవడాన్ని రోజువారీ ఆచరణగా మారుస్తాయి.</p>
+    </div>
+    <div class="shell steps-grid">
+      {steps.map(([title, text], index) => (
+        <article class="step-card">
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <h3>{title}</h3>
+          <p>{text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section programs-section">
+    <div class="shell section-heading-row">
+      <div>
+        <p class="eyebrow">ప్రధాన అధ్యయన మార్గాలు</p>
+        <h2>శాస్త్రంతో నిరంతర అనుబంధం</h2>
+      </div>
+      <a class="text-link" href={withBase('/programs/')}>అన్ని కార్యక్రమాలు <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="shell program-list">
+      {programs.map((program) => (
+        <article class="program-row">
+          <span class="program-number">{program.number}</span>
+          <h3>{program.title}</h3>
+          <p>{program.text}</p>
+          <span class="program-arrow" aria-hidden="true">↗</span>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section cta-section">
+    <div class="shell cta-card">
+      <div>
+        <p class="eyebrow">మీ అధ్యయన యాత్ర</p>
+        <h2>సత్సంగంతో మొదలుపెట్టండి</h2>
+        <p>ప్రత్యక్ష తరగతులు, ప్రకటనలు, సాధన Telegram లో కొనసాగుతాయి. గ్రూప్ యాక్సెస్‌ను నిర్వాహకులు సమాజంలో నేరుగా సమన్వయం చేస్తారు.</p>
+      </div>
+      <a class="button button-light" href={withBase('/register/')}>నమోదు చేసుకోండి <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+</BaseLayout>

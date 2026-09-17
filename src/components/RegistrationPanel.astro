@@ -1,0 +1,225 @@
+---
+import { registrationEndpoint, registrationReady } from '../data/registration';
+
+interface Props {
+  locale: 'te' | 'en';
+}
+
+const { locale } = Astro.props;
+const isEnglish = locale === 'en';
+
+const copy = isEnglish
+  ? {
+      heading: 'Tell us how you would like to participate',
+      lead: 'Share a few details so the KVJ organizers can review your interest and coordinate the next step privately.',
+      fullName: 'Full name',
+      mobile: 'Mobile or WhatsApp number',
+      email: 'Email address',
+      optional: 'Optional',
+      city: 'City',
+      language: 'Preferred language',
+      program: 'Program interest',
+      background: 'Learning background or message',
+      backgroundHint: 'Tell us what you have studied, or what you hope to learn.',
+      choose: 'Select an option',
+      telugu: 'Telugu',
+      english: 'English',
+      both: 'Telugu and English',
+      bhagavatam: 'Srimad Bhagavatam',
+      ramayanam: 'Ramayanam and Sundarakanda',
+      narayaneeyam: 'Narayaneeyam',
+      general: 'General satsangam or not sure yet',
+      consent: 'I agree that KVJ organizers may use these details to review my registration and contact me about satsangam participation.',
+      submit: 'Submit registration',
+      connecting: 'Registration is being connected. Please return shortly.',
+      submitting: 'Submitting your registration...',
+      success: 'Registration received. KVJ organizers will review it and coordinate the next step privately.',
+      error: 'We could not confirm the submission. Please try again.',
+      privacyHeading: 'Your details stay private',
+      privacy: 'Registration details are sent only to the KVJ organizer spreadsheet. They are not displayed on this website or shared as Telegram contact details.',
+      noPayment: 'No payment is collected on this page.',
+      nextHeading: 'What happens next',
+      nextSteps: [
+        'An organizer reviews your registration.',
+        'The organizer contacts you using the details you provide.',
+        'Class and Telegram access details are coordinated privately.',
+      ],
+    }
+  : {
+      heading: 'మీరు ఎలా పాల్గొనాలనుకుంటున్నారో తెలియజేయండి',
+      lead: 'మీ ఆసక్తిని పరిశీలించి, తదుపరి దశను వ్యక్తిగతంగా సమన్వయం చేయడానికి KVJ నిర్వాహకులకు కొన్ని వివరాలు అందించండి.',
+      fullName: 'పూర్తి పేరు',
+      mobile: 'మొబైల్ లేదా WhatsApp నంబర్',
+      email: 'ఇమెయిల్ చిరునామా',
+      optional: 'ఐచ్ఛికం',
+      city: 'నగరం',
+      language: 'ఇష్టమైన భాష',
+      program: 'ఆసక్తి ఉన్న కార్యక్రమం',
+      background: 'అధ్యయన నేపథ్యం లేదా సందేశం',
+      backgroundHint: 'మీరు చదివిన విషయాలు లేదా నేర్చుకోవాలనుకుంటున్నది తెలియజేయండి.',
+      choose: 'ఒక ఎంపిక ఎంచుకోండి',
+      telugu: 'తెలుగు',
+      english: 'English',
+      both: 'తెలుగు మరియు English',
+      bhagavatam: 'శ్రీమద్భాగవతం',
+      ramayanam: 'రామాయణం మరియు సుందరకాండ',
+      narayaneeyam: 'నారాయణీయం',
+      general: 'సాధారణ సత్సంగం లేదా ఇంకా నిర్ణయించుకోలేదు',
+      consent: 'నా నమోదును పరిశీలించి, సత్సంగంలో పాల్గొనడం గురించి నన్ను సంప్రదించడానికి KVJ నిర్వాహకులు ఈ వివరాలను ఉపయోగించవచ్చని అంగీకరిస్తున్నాను.',
+      submit: 'నమోదు పంపండి',
+      connecting: 'నమోదు వ్యవస్థను అనుసంధానిస్తున్నాము. దయచేసి కొద్దిసేపటి తర్వాత తిరిగి రండి.',
+      submitting: 'మీ నమోదును పంపుతున్నాము...',
+      success: 'నమోదు అందింది. KVJ నిర్వాహకులు పరిశీలించి తదుపరి దశను వ్యక్తిగతంగా సమన్వయం చేస్తారు.',
+      error: 'నమోదు అందిందని నిర్ధారించలేకపోయాము. దయచేసి మళ్లీ ప్రయత్నించండి.',
+      privacyHeading: 'మీ వివరాలు గోప్యంగా ఉంటాయి',
+      privacy: 'నమోదు వివరాలు KVJ నిర్వాహకుల spreadsheet కు మాత్రమే పంపబడతాయి. ఈ వెబ్‌సైట్‌లో లేదా Telegram సంప్రదింపు వివరాలుగా ప్రదర్శించబడవు.',
+      noPayment: 'ఈ పేజీలో ఎటువంటి చెల్లింపు తీసుకోము.',
+      nextHeading: 'తదుపరి ప్రక్రియ',
+      nextSteps: [
+        'నిర్వాహకులు మీ నమోదును పరిశీలిస్తారు.',
+        'మీరు అందించిన వివరాలతో నిర్వాహకులు సంప్రదిస్తారు.',
+        'తరగతి మరియు Telegram యాక్సెస్ వివరాలను వ్యక్తిగతంగా సమన్వయం చేస్తారు.',
+      ],
+    };
+---
+
+<section class="section interior-section registration-section">
+  <div class="shell registration-layout">
+    <div class="registration-form-card">
+      <p class="eyebrow">{isEnglish ? 'Private registration' : 'గోప్య నమోదు'}</p>
+      <h2>{copy.heading}</h2>
+      <p class="registration-lead">{copy.lead}</p>
+
+      <form
+        class="registration-form"
+        action={registrationReady ? registrationEndpoint : undefined}
+        method="post"
+        target="registration-result"
+        data-registration-form
+        data-ready={String(registrationReady)}
+      >
+        <div class="form-grid">
+          <label class="field">
+            <span>{copy.fullName} <b aria-hidden="true">*</b></span>
+            <input name="fullName" type="text" autocomplete="name" maxlength="100" required />
+          </label>
+
+          <label class="field">
+            <span>{copy.mobile} <b aria-hidden="true">*</b></span>
+            <input name="mobile" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" pattern="[+0-9 ()-]{8,30}" required />
+          </label>
+
+          <label class="field">
+            <span>{copy.email} <small>{copy.optional}</small></span>
+            <input name="email" type="email" autocomplete="email" maxlength="150" />
+          </label>
+
+          <label class="field">
+            <span>{copy.city} <b aria-hidden="true">*</b></span>
+            <input name="city" type="text" autocomplete="address-level2" maxlength="100" required />
+          </label>
+
+          <label class="field">
+            <span>{copy.language} <b aria-hidden="true">*</b></span>
+            <select name="language" required>
+              <option value="">{copy.choose}</option>
+              <option value="Telugu">{copy.telugu}</option>
+              <option value="English">{copy.english}</option>
+              <option value="Telugu and English">{copy.both}</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>{copy.program} <b aria-hidden="true">*</b></span>
+            <select name="program" required>
+              <option value="">{copy.choose}</option>
+              <option value="Srimad Bhagavatam">{copy.bhagavatam}</option>
+              <option value="Ramayanam and Sundarakanda">{copy.ramayanam}</option>
+              <option value="Narayaneeyam">{copy.narayaneeyam}</option>
+              <option value="General satsangam or not sure">{copy.general}</option>
+            </select>
+          </label>
+
+          <label class="field field-wide">
+            <span>{copy.background} <small>{copy.optional}</small></span>
+            <textarea name="background" rows="5" maxlength="500" placeholder={copy.backgroundHint}></textarea>
+          </label>
+        </div>
+
+        <div class="form-honeypot" aria-hidden="true">
+          <label>Website <input name="website" type="text" tabindex="-1" autocomplete="off" /></label>
+        </div>
+        <input name="submissionId" type="hidden" value="" />
+
+        <label class="consent-field">
+          <input name="consent" type="checkbox" value="yes" required />
+          <span>{copy.consent}</span>
+        </label>
+
+        <button class="button registration-submit" type="submit" disabled={!registrationReady}>
+          <span>{registrationReady ? copy.submit : copy.connecting}</span>
+        </button>
+        <p class="form-status" data-form-status aria-live="polite"></p>
+      </form>
+
+      <iframe name="registration-result" class="registration-target" title="Registration response"></iframe>
+    </div>
+
+    <aside class="registration-aside">
+      <div>
+        <span class="registration-symbol" aria-hidden="true">✦</span>
+        <h2>{copy.privacyHeading}</h2>
+        <p>{copy.privacy}</p>
+        <p class="registration-note">{copy.noPayment}</p>
+      </div>
+      <div class="registration-next">
+        <h3>{copy.nextHeading}</h3>
+        <ol>
+          {copy.nextSteps.map((step, index) => <li><span>{index + 1}</span>{step}</li>)}
+        </ol>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<script define:vars={{ submitting: copy.submitting, success: copy.success, error: copy.error }}>
+  const form = document.querySelector('[data-registration-form]');
+  const status = document.querySelector('[data-form-status]');
+
+  if (form instanceof HTMLFormElement && status instanceof HTMLElement && form.dataset.ready === 'true') {
+    form.addEventListener('submit', () => {
+      const submitButton = form.querySelector('button[type="submit"]');
+      const submissionId = form.querySelector('input[name="submissionId"]');
+      const target = document.querySelector('iframe[name="registration-result"]');
+
+      if (submissionId instanceof HTMLInputElement) {
+        submissionId.value = typeof crypto.randomUUID === 'function'
+          ? crypto.randomUUID()
+          : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      }
+
+      if (submitButton instanceof HTMLButtonElement) submitButton.disabled = true;
+      status.textContent = submitting;
+      status.dataset.state = 'pending';
+
+      let confirmed = false;
+      const timeout = window.setTimeout(() => {
+        if (confirmed) return;
+        status.textContent = error;
+        status.dataset.state = 'error';
+        if (submitButton instanceof HTMLButtonElement) submitButton.disabled = false;
+      }, 15000);
+
+      if (target instanceof HTMLIFrameElement) {
+        target.addEventListener('load', () => {
+          confirmed = true;
+          window.clearTimeout(timeout);
+          status.textContent = success;
+          status.dataset.state = 'success';
+          form.reset();
+          if (submitButton instanceof HTMLButtonElement) submitButton.disabled = false;
+        }, { once: true });
+      }
+    });
+  }
+</script>
