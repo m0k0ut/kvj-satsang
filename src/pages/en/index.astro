@@ -31,12 +31,12 @@ const programs = [
       </figure>
     </div>
   </section>
-  <section class="marquee" aria-label="Satsangam experience"><div class="shell marquee-inner"><span>Listen</span><i>✦</i><span>Read</span><i>✦</i><span>Reflect</span><i>✦</i><span>Recite</span><i>✦</i><span>Serve</span></div></section>
+  <section class="marquee" aria-label="Satsang experience"><div class="shell marquee-inner"><span>Listen</span><i>✦</i><span>Read</span><i>✦</i><span>Reflect</span><i>✦</i><span>Recite</span><i>✦</i><span>Serve</span></div></section>
   <section class="section intro-section">
-    <div class="shell intro-grid"><div><p class="eyebrow">The satsangam experience</p><h2>From listening to daily practice</h2></div><p class="section-lead">Each class is part of a structured learning journey. Teacher guidance, study material, individual practice, and group revision turn scripture learning into a regular discipline.</p></div>
+    <div class="shell intro-grid"><div><p class="eyebrow">The satsang experience</p><h2>From listening to daily practice</h2></div><p class="section-lead">Each class is part of a structured learning journey. Teacher guidance, study material, individual practice, and group revision turn scripture learning into a regular discipline.</p></div>
     <div class="shell program-list">
       {programs.map(([number, title, text]) => <article class="program-row"><span class="program-number">{number}</span><h3>{title}</h3><p>{text}</p><span class="program-arrow" aria-hidden="true">↗</span></article>)}
     </div>
   </section>
-  <section class="section cta-section"><div class="shell cta-card"><div><p class="eyebrow">Your learning journey</p><h2>Begin with the satsangam</h2><p>Live classes, announcements, and practice continue on Telegram. Organizers coordinate group access directly within the community.</p></div><a class="button button-light" href={withBase('/en/register/')}>Register interest <span aria-hidden="true">→</span></a></div></section>
+  <section class="section cta-section"><div class="shell cta-card"><div><p class="eyebrow">Your learning journey</p><h2>Begin with the satsang</h2><p>Live classes, announcements, and practice continue on Telegram. Organizers coordinate group access directly within the community.</p></div><a class="button button-light" href={withBase('/en/register/')}>Register interest <span aria-hidden="true">→</span></a></div></section>
 </BaseLayout>
