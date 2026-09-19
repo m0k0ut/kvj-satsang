@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Install dependencies",
+      "type": "shell",
+      "command": "npm ci",
+      "inAgents": true,
+      "runOptions": {
+        "runOn": "worktreeCreated"
+      }
+    },
+    {
+      "label": "Start development server",
+      "type": "shell",
+      "command": "npm run dev",
+      "inAgents": true
+    },
+    {
+      "label": "Run checks",
+      "type": "shell",
+      "command": "npm run check",
+      "inAgents": true
+    },
+    {
+      "label": "Build site",
+      "type": "shell",
+      "command": "npm run build",
+      "inAgents": true
+    }
+  ]
+}
