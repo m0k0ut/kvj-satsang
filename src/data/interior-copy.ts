@@ -30,7 +30,7 @@ export const pageCopy = {
       eyebrow: 'Learning programs', title: 'A structured journey through each text', description: 'Telugu learning tracks that combine live teaching, recitation, revision, and parayanam.',
     },
     about: {
-      eyebrow: 'Founder and teacher', title: 'A life devoted to education, Bhakti, and service', description: 'Meet Smt. Radha Mataji, founder, principal teacher, and spiritual guide of KVJ Satsang.',
+      eyebrow: 'Founder and teacher', title: 'A life devoted to education, Bhakti, and service', description: 'Meet Radha Madam, founder, principal teacher, and spiritual guide of KVJ Satsang.',
     },
     classes: {
       eyebrow: 'How classes work', title: 'Class on Telegram. Practice in daily life.', description: 'A simple learning loop that moves from live explanation to reading, revision, and group parayanam.',

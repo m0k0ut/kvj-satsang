@@ -31,7 +31,7 @@ GitHub Actions must publish only Astro's generated `dist/` artifact. The reposit
 Use this structure:
 
 ```text
-KVJ_Satsangam/
+kvj-satsang/
   plan.md                    # Internal planning and review
   research/                  # Internal, never published
   content/                   # Internal briefs and working copy
@@ -265,7 +265,7 @@ Done when:
 
 Review the complete release candidate in Nimbalyst. Only the user can approve public publication.
 
-Approved by the user on September 17, 2026. The approved release is live at https://m0k0ut.github.io/kvj-satsangam/.
+Approved by the user on September 17, 2026. The approved release is live at https://m0k0ut.github.io/kvj-satsang/.
 
 ### Work item 7: Publish through GitHub Pages
 

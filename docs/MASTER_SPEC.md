@@ -141,7 +141,7 @@ The public site never reads registration rows. Organizers use the Google Sheet d
 ## 6. Repository architecture
 
 ```text
-KVJ_Satsangam/
+kvj-satsang/
   AGENTS.md                 # Symlink to CLAUDE.md
   CLAUDE.md                 # Canonical agent guide
   README.md                 # Maintainer operations
@@ -336,7 +336,7 @@ npm run build
 ### 12.2 GitHub Pages validation
 
 ```bash
-env GITHUB_REPOSITORY=m0k0ut/KVJ_Satsangam SITE_URL=https://m0k0ut.github.io npm run build
+env GITHUB_REPOSITORY=m0k0ut/kvj-satsang SITE_URL=https://m0k0ut.github.io npm run build
 ```
 
 This simulates the repository base path. Run it after changes to routing, navigation, canonical URLs, public assets, or deployment configuration.

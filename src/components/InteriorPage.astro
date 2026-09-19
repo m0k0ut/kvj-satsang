@@ -36,10 +36,10 @@ const classSteps = isEnglish
 
 const teacherBiography = isEnglish
   ? [
-      'Radha madam is the founder of Krishnam Vande Jagadgurum Satsang, its principal teacher, and spiritual guide. A respected educator and committed practitioner in the Sri Vaishnava tradition, she studied under the guidance of Sri Chinna Jeeyar Swamy. Her spiritual journey has embraced several forms of worship and today centers on Bhakti Yoga and devotion to Sri Krishna.',
+      'Radha garu is the founder of Krishnam Vande Jagadgurum Satsang, its principal teacher, and spiritual guide. A respected educator and committed practitioner in the Sri Vaishnava tradition, she studied under the guidance of Sri Chinna Jeeyar Swamy. Her spiritual journey has embraced several forms of worship and today centers on Bhakti Yoga and devotion to Sri Krishna.',
       'Her study and teaching draw from the Vedas, Puranas, Srimad Bhagavatam, and the wider Vaishnava devotional tradition. A trained veena player, she also participated in a mass veena performance recognized with a Guinness World Records title.',
       'She believes education can create lasting change in society and lives by that conviction. After guiding her two sons through their education at IIT and BITS, she now teaches and supports a learning community of more than 1,400 students.',
-      'Together with her husband, Mr. Venkateswarlu, she has built a life centered on family, learning, and Bhakti Yoga. Alongside her responsibilities at KVJ, she leads satsangs, annadanam initiatives, and devotional journeys to temples across India.',
+      'Together with her husband, Mr. Venkateswarlu garu, she has built a life centered on family, learning, and Bhakti Yoga. Alongside her responsibilities at KVJ, she leads satsangs, annadanam initiatives, and devotional journeys to temples across India.',
     ]
   : [
       'రాధ గారు కృష్ణం వందే జగద్గురుమ్ సత్సంగం వ్యవస్థాపకురాలు, ప్రధాన గురువు, ఆధ్యాత్మిక మార్గదర్శి. గౌరవనీయ విద్యావేత్తగా, శ్రీ వైష్ణవ సంప్రదాయానికి నిబద్ధ సాధకురాలిగా, శ్రీ చిన్న జీయర్ స్వామివారి మార్గదర్శకత్వంలో అధ్యయనం చేశారు. వివిధ ఆరాధనా పద్ధతులను అనుసరించిన ఆమె ఆధ్యాత్మిక యాత్ర ప్రస్తుతం భక్తియోగం, శ్రీకృష్ణారాధనపై ప్రధానంగా కేంద్రీకృతమైంది.',
@@ -106,12 +106,12 @@ const galleryPhotos = [
     <section class="section interior-section">
       <div class="shell teacher-grid">
         <figure class="teacher-photo">
-          <Image src={teacherImage} alt={isEnglish ? 'Smt. Radha Mataji in prayer during a temple pilgrimage' : 'ఆలయ యాత్రలో ధ్యానం చేస్తున్న శ్రీమతి రాధ తుపాకుల గారు'} width={760} quality={88} />
+          <Image src={teacherImage} alt={isEnglish ? 'Smt. Radha ji in prayer during a temple pilgrimage' : 'ఆలయ యాత్రలో ధ్యానం చేస్తున్న శ్రీమతి రాధ తుపాకుల గారు'} width={760} quality={88} />
           <figcaption>{isEnglish ? 'Photo supplied by KVJ Satsang' : 'KVJ సత్సంగం అందించిన చిత్రం'}</figcaption>
         </figure>
         <div class="teacher-profile">
           <p class="eyebrow">{isEnglish ? 'Founder of KVJ Satsang · Principal teacher · Spiritual guide' : 'KVJ సత్సంగం వ్యవస్థాపకురాలు · ప్రధాన గురువు · ఆధ్యాత్మిక మార్గదర్శి'}</p>
-          <h2>{isEnglish ? 'Smt. Radha Mataji' : 'శ్రీమతి రాధ తుపాకుల గారు'}</h2>
+          <h2>{isEnglish ? 'Smt. Radha ji' : 'శ్రీమతి రాధ తుపాకుల గారు'}</h2>
           <div class="teacher-biography">
             {teacherBiography.map((paragraph, index) => <p class={index === 0 ? 'large-copy' : undefined}>{paragraph}</p>)}
           </div>

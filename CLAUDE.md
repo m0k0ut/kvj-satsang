@@ -118,7 +118,7 @@ npm run build
 Validate the GitHub project-page configuration:
 
 ```bash
-env GITHUB_REPOSITORY=m0k0ut/kvj-satsangam SITE_URL=https://m0k0ut.github.io npm run build
+env GITHUB_REPOSITORY=m0k0ut/kvj-satsang SITE_URL=https://m0k0ut.github.io npm run build
 ```
 
 Validate Apps Script syntax after backend changes:

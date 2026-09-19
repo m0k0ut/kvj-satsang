@@ -2,7 +2,7 @@
 
 Website project for the Krishnam Vande Jagadgurum Telugu devotional learning community.
 
-Live site: https://m0k0ut.github.io/kvj-satsangam/
+Live site: https://m0k0ut.github.io/kvj-satsang/
 
 ## Current phase
 
@@ -27,7 +27,7 @@ Nimbalyst Tracker is authoritative for current execution status, dependencies, e
 ## Project structure
 
 ```text
-KVJ_Satsangam/
+kvj-satsang/
   AGENTS.md                 # Symlink to CLAUDE.md
   CLAUDE.md                 # Canonical coding-agent guide
   README.md
