@@ -2,7 +2,7 @@
 
 Website project for the Krishnam Vande Jagadgurum Telugu devotional learning community.
 
-Live site: https://m0k0ut.github.io/kvj-satsang/
+Live site: [https://m0k0ut.github.io/kvj-satsang/](https://m0k0ut.github.io/kvj-satsang/)
 
 ## Current phase
 

@@ -1,8 +1,11 @@
 import { readdir, readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { extname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../dist/', import.meta.url));
+const botAvatar = fileURLToPath(new URL('./telegram-bot/handoff/kvj-mitra-bot-avatar.png', import.meta.url));
+const botAvatarHash = createHash('sha256').update(await readFile(botAvatar)).digest('hex');
 const forbiddenPaths = [
   'research/',
   'content/site-brief',
@@ -14,6 +17,7 @@ const forbiddenPaths = [
   'telegram-group-findings',
   'kvj_mitrabot',
   'kvj satsanga mitra',
+  'kvj-mitra-bot-avatar',
   'telegram_bot_token',
   'telegram_group_chat_id',
 ];
@@ -38,8 +42,12 @@ for (const file of files) {
   if (forbiddenPaths.some((token) => publicPath.toLowerCase().includes(token))) {
     violations.push(publicPath);
   }
+  const bytes = await readFile(file);
+  if (createHash('sha256').update(bytes).digest('hex') === botAvatarHash) {
+    violations.push(`${publicPath} (protected bot avatar)`);
+  }
   if (textExtensions.has(extname(file))) {
-    const body = await readFile(file, 'utf8');
+    const body = bytes.toString('utf8');
     if (forbiddenPaths.some((token) => body.toLowerCase().includes(token))) {
       violations.push(`${publicPath} (content)`);
     }

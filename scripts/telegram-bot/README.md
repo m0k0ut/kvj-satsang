@@ -56,6 +56,10 @@ The active Script Properties are:
 
 Use the official BotFather account.
 
+### Profile avatar handoff
+
+Use `scripts/telegram-bot/handoff/kvj-mitra-bot-avatar.png` when BotFather needs the approved profile image. Keep this file in the bot operations directory. It is intentionally outside `src/` and `public/`, and the production privacy check rejects both its filename and exact image bytes.
+
 - Display name: `KVJ Satsanga Mitra`
 - Username: `KVJ_MitraBot`
 - Privacy mode: disabled for near-real-time group update delivery
