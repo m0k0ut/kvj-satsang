@@ -47,6 +47,7 @@ kvj-satsang/
     favicon.svg
   scripts/                  # Privacy and internal-link checks
     google-apps-script/     # Registration backend source
+    telegram-bot/          # Telegram operations bot source, tests, and runbook
   .github/workflows/        # GitHub Pages deployment
 ```
 
@@ -64,6 +65,7 @@ Before review:
 ```bash
 npm run check
 npm run build
+npm run test:telegram-bot
 ```
 
 The build validates content schemas, generates the static site, checks for private material, and verifies internal links.
@@ -96,11 +98,28 @@ The maintained backend source is `scripts/google-apps-script/Code.gs`. After cha
 2. Save and deploy a new web app version that executes as the spreadsheet owner.
 3. Keep web app access set to `Anyone` so the public registration form can submit.
 4. Put the resulting `/exec` URL in `src/data/registration.ts`.
-5. Submit one labeled test registration and confirm the row in `Sheet1`.
+5. Submit one labeled test registration and confirm the row in tab `Sheet1` of `KVJ_Registrations`.
 
 The Apps Script URL is public by design, but it does not grant spreadsheet access. Never add Google account credentials or private contact data to the repository.
 
 The deployed script is bound to the registration Sheet and uses `@OnlyCurrentDoc`, which limits its authorization to that spreadsheet.
+
+## Telegram operations bot
+
+`KVJ Satsanga Mitra` is a Telegram-only operations bot. It runs from a standalone Google Apps Script project and remains separate from the website and registration backend. It does not translate, moderate members, or archive conversation.
+
+The maintained source, deployment procedure, command reference, token-rotation process, and recovery steps are in `scripts/telegram-bot/README.md`.
+
+Before changing or activating the bot:
+
+```bash
+npm run test:telegram-bot
+node --check < scripts/telegram-bot/Code.gs
+```
+
+Never commit the bot token, group identifier, invite link, enrollment code, raw update, or member data. Do not add the bot identity or username to the public site.
+
+The approved Telegram group blocks regular members from sending text. The bot therefore needs administrator status with `Pin Messages` as its only selectable administrator right. Telegram displays `Change Group Info` as an inherited group-member permission, and the bot code does not call group-edit APIs. Near-real-time commands use a Telegram webhook. Privacy mode is disabled so the bot receives current group updates, but ordinary message content is discarded without storage or response. Automated welcomes remain disabled until the organizer enables them.
 
 ## GitHub Pages
 
@@ -111,4 +130,4 @@ The repository can remain private. GitHub Actions builds and deploys only `dist/
 3. Astro derives the project-page base path from `GITHUB_REPOSITORY`.
 4. Set `SITE_URL` only if the final Pages origin or custom domain needs to override the default.
 
-The release candidate uses the organizer-supplied teacher photograph, licensed public-domain artwork in the gallery, and resource summaries without copied Telegram files. Telegram is presented only as the class platform. No invite, username, email, or phone number is published. Registration details are stored privately in the organizer's Google Sheet. Public release still requires the user's Gate 3 approval.
+The live site uses the organizer-supplied teacher photograph, licensed public-domain artwork in the gallery, and resource summaries without copied Telegram files. Telegram is presented only as the class platform. No invite, username, email, phone number, or bot identity is published. Registration details are stored privately in the organizer's Google Sheet. Gate 3 was approved and GitHub Pages publication completed on September 17, 2026.

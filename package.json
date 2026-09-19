@@ -8,6 +8,7 @@
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/check-dist.mjs && node scripts/check-links.mjs",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "test:telegram-bot": "node scripts/telegram-bot/test.mjs",
     "check:privacy": "node scripts/check-dist.mjs",
     "check:links": "node scripts/check-links.mjs"
   },

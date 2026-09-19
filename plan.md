@@ -339,7 +339,7 @@ Create backlog items, not implementation commitments, for:
 | Headless CMS | More than one nontechnical editor or frequent page updates become difficult through GitHub |
 | Supabase schedule | Schedule changes must appear immediately without a site rebuild |
 | Member accounts | The group identifies a real private-content requirement |
-| Telegram automation | Repeated manual publishing produces measurable administrative burden |
+| Additional Telegram automation | The approved operations bot has a measured need for another narrowly scoped capability |
 | Donations | Legal entity, payment ownership, accounting, and privacy requirements are confirmed |
 | Membership card | Organizers define its purpose, eligibility, data fields, and revocation process |
 | Analytics | A specific decision requires traffic data and a privacy-preserving measurement plan is approved |
@@ -358,6 +358,76 @@ The MVP is complete when:
 - The user approves the release candidate.
 - GitHub Pages serves the approved build over HTTPS.
 - The maintenance guide is complete.
+
+## Post-launch workstream: KVJ Satsanga Mitra
+
+Status: `active`
+
+Nimbalyst phase: `implementation`
+
+Suggested tags: `#telegram` `#bot` `#operations` `#security` `#post-launch`
+
+Decision: Create `KVJ Satsanga Mitra` as `KVJ_MitraBot` and enroll it only in the approved KVJ Telegram group. Run the bot from a standalone Google Apps Script web app with Telegram webhook delivery. Disable privacy mode so the bot receives current group updates, while discarding ordinary message content after routing. The group blocks regular-member text, so the user approved administrator status with only `Pin Messages` enabled.
+
+This workstream does not modify the live website, reopen Gate 3, or change the existing Translator bot.
+
+### Bot work item 1: Implement and validate the operations package
+
+Actions:
+
+- Maintain the Apps Script source, manifest, test harness, and runbook under `scripts/telegram-bot/`.
+- Support approved member and administrator commands.
+- Enforce group isolation, dynamic administrator checks, minimal state, idempotent update handling, reminder limits, and welcome batching.
+- Keep all credentials, group identifiers, invite links, raw updates, and member data out of the repository and Nimbalyst.
+
+Done when:
+
+- The bot test harness and syntax check pass.
+- The Astro check and build remain green.
+- The generated site contains no bot identity or private Telegram detail.
+
+### Bot work item 2: Create and activate the bot
+
+Dependencies: Bot work item 1
+
+Actions:
+
+- Create the exact identity through the official BotFather.
+- Disable privacy mode for near-real-time delivery and keep group joining enabled.
+- Create a standalone Apps Script project and store the token only in Script Properties.
+- Enroll the approved group through the temporary enrollment-code flow.
+- Deploy the Apps Script web app, configure the webhook, and install the one-minute maintenance trigger.
+- Grant administrator status with only `Pin Messages` enabled so the bot can reply and pin organizer-approved class notices.
+- Keep automated welcomes disabled until the organizer explicitly enables them.
+- Apply the approved Telugu greeting and bold Telugu signature to every bot message.
+- Verify command behavior, administrator authorization, group isolation, ordinary-message silence, pinned notices, and reminder behavior without posting in the live group during setup.
+
+Done when:
+
+- `KVJ_MitraBot` exists with the approved display name.
+- The bot is present only in the approved group and has only the `Pin Messages` optional administrator privilege.
+- The Telegram webhook and one-minute maintenance trigger are active.
+- Private checks pass without exposing private data or posting setup messages to the group.
+- Nimbalyst contains non-secret implementation and activation evidence.
+
+Current activation state on September 19, 2026:
+
+- BotFather identity, Apps Script activation, and group enrollment are complete.
+- The Apps Script web app, Telegram webhook, command menu, and one-minute `runScheduledTasks` maintenance trigger are active.
+- BotFather privacy mode is disabled so current group updates reach the webhook.
+- `Pin Messages` is the only selectable administrator right left enabled. Telegram shows `Change Group Info` as inherited from the group's member permissions and disables its switch in the bot editor. The bot code does not call group-edit APIs.
+- Webhook delivery, the message envelope, quiet ordinary-message handling, disabled-by-default welcomes, and pinned class notices are implemented and covered by the test harness.
+- A private `/status` check passed within seconds and no setup message was sent to the group.
+- Group announcements, notices, and visible acceptance messages remain deferred until the organizer is ready.
+
+## Post-launch maintenance update: September 19, 2026
+
+The user approved two public maintenance changes:
+
+- Rename the GitHub repository to `kvj-satsang` and move the project-page URL to `https://m0k0ut.github.io/kvj-satsang/`.
+- Update the English About page with the approved teacher honorifics while leaving Telugu content unchanged.
+
+This maintenance release does not reopen the completed website launch gate. It requires the standard content, project-page build, deployment, and live browser checks.
 
 ## Review decision requested
 

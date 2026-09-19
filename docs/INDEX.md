@@ -21,6 +21,7 @@ This directory holds durable internal documentation for coding agents and mainta
 | Repository | Current implementation |
 | Google Sheet | Organizer-owned registration records |
 | Apps Script project | Deployed registration backend version |
+| Standalone Telegram Apps Script project | Deployed KVJ Satsanga Mitra version and trigger |
 | GitHub Actions | Build validation and GitHub Pages publication workflow |
 
 ## Update discipline
@@ -30,3 +31,4 @@ This directory holds durable internal documentation for coding agents and mainta
 - Record implementation detail and interfaces in `MASTER_SPEC.md`.
 - Record current task evidence in Nimbalyst Tracker comments.
 - Keep all approval decisions in Nimbalyst. Passing tests do not grant release approval.
+- Keep Telegram operational instructions in `../scripts/telegram-bot/README.md` and discovery evidence in `../research/telegram-group-findings.md`.

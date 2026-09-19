@@ -6,6 +6,77 @@ This is an internal research note based on a live review of the Krishnam Vande J
 
 The review covered the current conversation, search results, group files, media, music, voice messages, links, and Telegram group statistics. No messages were sent, changed, downloaded, or deleted.
 
+This file is the single discovery record for the Telegram group. Add future observations as dated refresh sections here instead of creating parallel discovery notes.
+
+## September 17, 2026 refresh
+
+A second review through iPhone Mirroring found:
+
+- 1,684 members, with the visible online count fluctuating from 75 to 89 during review
+- 23.1K messages in Telegram's displayed metric, up 165 or 0.72 percent for the September 10 to September 17 period
+- 734 viewing members, up 33 or 4.71 percent
+- 49 posting members, up 6 or 13.95 percent
+- 171 photos, 20 videos, 30 files, 42 music files, 44 voice messages, and 72 links
+- many recent member-join service messages, consistent with a current recruitment increase
+- recent activity for Sundarakanda, Devi Narayaneeyam practice, Narayaneeyam, and Bhagavatam practice
+
+A later operational check on the same date showed 1,698 members and 112 members online. Online counts are transient and should not be treated as a stable publication metric.
+
+The shared-media counts were unchanged from the September 16 review. Member growth continued. Telegram timestamps shown in the interface are device-local, while schedule text may state IST. Do not infer a public schedule from either source.
+
+### Bots and automation
+
+The group currently has one existing automation bot: the Translator bot. Its role remains translation. Searches for literal `bot`, `Welcome`, and `/start` did not reveal additional bot behavior in the visible message history. The organizer confirmed that the Translator bot is the only existing bot.
+
+The organizer initially approved a second bot with these September 17 boundaries:
+
+- Display name: `KVJ Satsanga Mitra`
+- Username: `KVJ_MitraBot`
+- Role: group operations only
+- Membership boundary: approved group only
+- Runtime: a standalone Google Apps Script project using one-minute Bot API polling
+- Privacy mode: enabled
+- Member functions: help, rules, current organizer-maintained notice, registration, website, and privacy information
+- Administrator functions: set today's notice, publish an announcement, schedule or cancel a one-time reminder, and view operating status
+- Excluded functions: translation, spiritual advice, moderation, deletion, muting, banning, pinning, member management, message archival, and profile storage
+
+The September 19 refresh below supersedes the polling, privacy-mode, administrator, and pinning assumptions in this initial design.
+
+The maintained source and runbook live under `scripts/telegram-bot/`. BotFather configuration, credential storage in Script Properties, group enrollment, and the one-minute trigger were completed on September 17, 2026.
+
+The first labeled group `/help` check exposed a Telegram permission constraint: regular members cannot send text in this group. Telegram rejected the bot reply for insufficient send rights. The organizer approved administrator status with every optional privilege disabled, solely so the bot can post operational replies. The organizer will apply that change later. Live `/help` and administrator-only `/status` verification remain pending.
+
+The bot token, group identifier, private invite links, member names, and raw Telegram updates must never be recorded in this file.
+
+## September 19, 2026 refresh
+
+A quiet operational review through iPhone Mirroring found 1,745 members and 55 members online at the final observation. The online count is transient. No message was posted, changed, pinned, or deleted in the group during this review.
+
+`KVJ Satsanga Mitra` is now listed as a group administrator. The selectable administrator rights were reduced discreetly so only `Pin Messages` remains enabled. Telegram shows `Change Group Info` as inherited from the group's member permissions and disables its switch in the bot editor. The bot code does not call group-edit APIs. Deletion, banning, invite, member-tag, story, video-chat, welcome-message, anonymous-posting, and administrator-promotion rights are disabled.
+
+The organizer revised the bot operating model:
+
+- Keep setup quiet. Do not send group tests, announcements, class notices, or member welcomes during activation.
+- Use near-real-time Telegram webhook delivery instead of frequent polling. A one-minute Apps Script trigger remains only for reminders and other scheduled maintenance.
+- Disable privacy mode so Telegram delivers the latest group updates to the bot.
+- Read ordinary updates only long enough to route commands and record the latest group activity time. Do not store message text, message history, names, or member profiles.
+- Ignore ordinary conversation. Do not infer moderation actions, class schedules, or pinning decisions from free-form member messages.
+- Let authorized administrators use `/set_today` privately when they are ready to publish and silently pin the current class notice.
+- Keep automated welcome messages disabled until the organizer explicitly enables them.
+- Start every bot message with `జై శ్రీ మన్నారాయణ🙏🙏` and end with the bold signature `కృష్ణం వందే జగద్గురుం 🪷🪄📖`.
+
+The existing Translator bot remains unchanged and retains translation responsibility. `KVJ Satsanga Mitra` remains an operations assistant and does not gain autonomous moderation authority.
+
+### September 19 activation evidence
+
+- The standalone Apps Script web app is deployed with a private webhook secret stored only in Script Properties.
+- Telegram webhook delivery and the one-minute `runScheduledTasks` maintenance trigger are active. Legacy polling remains available only for recovery after removing the webhook.
+- BotFather privacy mode is disabled so new group updates reach the webhook. Telegram does not provide historical group messages to bots, so activity awareness begins with updates delivered after activation.
+- The command menu is configured, automated welcomes remain disabled, and no group message was sent during setup.
+- A private administrator `/status` check returned within seconds. It reported no delivery error, no current class notice, and no pending reminders.
+- The private response began with `జై శ్రీ మన్నారాయణ🙏🙏` and ended with the bold signature `కృష్ణం వందే జగద్గురుం 🪷🪄📖`.
+- Group announcements, class notices, welcome messages, and group-visible command tests remain deferred until the organizer chooses to publish them.
+
 ## Executive understanding
 
 Krishnam Vande Jagadgurum is an active Telugu devotional learning community. Telegram is its operating hub, not simply an announcement channel. The group conducts live classes, organizes progressive scripture study, distributes study material, records practice, coordinates revision, and supports devotional service activities.

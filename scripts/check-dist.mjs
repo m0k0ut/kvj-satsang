@@ -12,6 +12,10 @@ const forbiddenPaths = [
   'plan.md',
   'readme.md',
   'telegram-group-findings',
+  'kvj_mitrabot',
+  'kvj satsanga mitra',
+  'telegram_bot_token',
+  'telegram_group_chat_id',
 ];
 const textExtensions = new Set(['.html', '.xml', '.txt', '.json', '.js', '.css', '.map']);
 

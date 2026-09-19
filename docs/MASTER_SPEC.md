@@ -1,10 +1,10 @@
 # KVJ Satsangam master specification
 
-Version: 1.0
+Version: 1.2
 
-Last updated: 2026-09-17
+Last updated: 2026-09-19
 
-Status: Implemented release candidate. Public launch pending Gate 3 in Nimbalyst.
+Status: Website live. Post-launch Telegram operations bot active.
 
 ## 1. Purpose
 
@@ -25,6 +25,8 @@ The site must remain simple to operate, inexpensive to host, respectful of parti
 | Public implementation | `src/` and `public/` |
 | Registration backend source | `scripts/google-apps-script/Code.gs` |
 | Deployed registration endpoint | `src/data/registration.ts` |
+| Telegram bot source and operations | `scripts/telegram-bot/` |
+| Telegram discovery evidence | `research/telegram-group-findings.md` |
 
 The user's latest explicit instruction overrides all repository documents. Nimbalyst is authoritative for approvals and active work state.
 
@@ -59,7 +61,7 @@ The user's latest explicit instruction overrides all repository documents. Nimba
 - member accounts or authentication
 - attendance tracking or membership cards
 - donations or payment processing
-- Telegram synchronization or automated invitations
+- automated Telegram invitations or message archival
 - private resource access
 - cookie-based analytics
 - an organizer admin dashboard
@@ -78,7 +80,8 @@ Reconsider an excluded capability only through a new Nimbalyst tracker item and 
 | Hosting | GitHub Pages | Static hosting aligned to the source workflow | Repository base paths must be supported |
 | Continuous delivery | GitHub Actions | Reproducible validation and artifact-only publication | Gate 3 must precede public deployment |
 | Registration | Google Apps Script web app | Adds controlled write behavior to an organizer-owned Sheet | Backend changes require versioned deployment |
-| Data store | Google Sheet, `Sheet1` | Familiar organizer workflow and no separate admin interface | Appropriate only for current registration volume |
+| Data store | Google Sheet `KVJ_Registrations`, tab `Sheet1` | Familiar organizer workflow and no separate admin interface | Appropriate only for current registration volume |
+| Telegram operations | Standalone Google Apps Script web app with Telegram webhook delivery | Near-real-time operations without adding a website server | Script Properties hold secrets and operational state |
 | Project control | Nimbalyst Plan and Tracker | Cross-session work state, evidence, dependencies, and human approval | Tracker evidence must stay current |
 
 The project intentionally avoids a public server runtime, JavaScript framework hydration, and a separate database.
@@ -138,6 +141,36 @@ sequenceDiagram
 
 The public site never reads registration rows. Organizers use the Google Sheet directly.
 
+### 5.2 Telegram operations runtime
+
+```mermaid
+flowchart LR
+    Members[KVJ Telegram members]
+    Admins[KVJ group administrators]
+    Telegram[Telegram Bot API]
+    Bot[Standalone Apps Script webhook]
+    Properties[Apps Script Script Properties]
+    Group[Configured KVJ group]
+    Site[Public KVJ website]
+
+    Members -->|Group updates| Telegram
+    Admins -->|Administrative commands| Telegram
+    Telegram -->|Webhook POST| Bot
+    Bot -->|getChatAdministrators| Telegram
+    Bot -->|Operational state| Properties
+    Bot -->|sendMessage and pinChatMessage| Telegram
+    Telegram --> Group
+    Bot -->|Public links only| Site
+```
+
+The bot uses display name `KVJ Satsanga Mitra` and username `KVJ_MitraBot`. This identity remains internal to Telegram operations and internal documentation. It must not appear on the public website.
+
+The webhook accepts member commands in the configured group and private administrative commands only from current group administrators. Telegram privacy mode is disabled so the bot receives the latest group updates. The handler records only the latest group activity timestamp for ordinary messages, then discards their content. It stores no message text, history, member profiles, names, phone numbers, or invite links.
+
+The approved group disables text messages for regular members. The bot therefore requires administrator status with `Pin Messages` as its only selectable administrator right. Telegram displays `Change Group Info` as inherited from the group's member permissions and disables its switch in the bot editor. The bot code does not call group-edit APIs. This role permits operational replies and silent pinning of organizer-approved class notices. It does not authorize moderation, deletion, member management, invitations, stories, video chats, welcome messages, or group editing.
+
+Operational state uses Script Properties. The bot token, group identifier, webhook URL, and webhook secret never enter the repository. `LockService` prevents concurrent handlers, `LAST_UPDATE_ID` provides idempotency, reminders are limited to 25, and automated welcome messages remain disabled until the organizer explicitly enables them. Every bot message starts with `జై శ్రీ మన్నారాయణ🙏🙏` and ends with the bold signature `కృష్ణం వందే జగద్గురుం 🪷🪄📖`.
+
 ## 6. Repository architecture
 
 ```text
@@ -167,6 +200,11 @@ kvj-satsang/
     check-links.mjs         # Internal link and asset check
     google-apps-script/
       Code.gs               # Maintained backend source
+    telegram-bot/
+      Code.gs               # Maintained Telegram operations source
+      appsscript.json        # Standalone Apps Script manifest
+      test.mjs              # Local bot behavior harness
+      README.md             # Deployment and recovery runbook
   .github/workflows/
     deploy.yml              # GitHub Pages pipeline
 ```
@@ -412,12 +450,13 @@ Prefer tracker comments for evidence. Do not claim a shared tracker description 
 | Navigation or URL helper | Project-page build and direct-route review |
 | Registration front end | Both builds, required-field behavior, keyboard and live-status review |
 | Apps Script backend | Syntax check, new deployment version, readiness GET, labeled Sheet test, duplicate retry |
+| Telegram bot | `npm run test:telegram-bot`, syntax check, Script Properties review, trigger review, labeled group tests |
 | Deployment workflow | Workflow syntax review, Gate 3 confirmation, public URL and route verification |
 | Documentation | Reference check, prohibited-dash scan, Nimbalyst evidence |
 
 ## 15. Current verified state
 
-As of 2026-09-17:
+As of 2026-09-19:
 
 - Telugu and English registration routes are implemented.
 - The Apps Script web app is deployed with public form access and current-document scope.
@@ -425,11 +464,20 @@ As of 2026-09-17:
 - Reusing the same submission ID returned `duplicate`.
 - Astro type checks pass with no errors, warnings, or hints.
 - The production build creates 17 pages.
-- The privacy scan passes for 54 generated files.
+- The privacy scan passes for 55 generated files.
 - The internal link scan passes for 17 HTML pages.
 - The GitHub project-page build passes.
-- Work items 4 and 6 remain In Review in Nimbalyst.
-- Gate 3 and GitHub Pages publication remain blocked.
+- Gate 3 was approved and GitHub Pages publication completed on September 17, 2026.
+- The live website is available at `https://m0k0ut.github.io/kvj-satsang/`.
+- The GitHub repository slug is `m0k0ut/kvj-satsang`.
+- English teacher references use the user-approved forms `Radha Madam`, `Smt. Radha ji`, `Radha garu`, and `Mr. Venkateswarlu garu` according to context.
+- The registration Google Sheet is named `KVJ_Registrations`; its file identity and `Sheet1` backend tab remain unchanged.
+- BotFather identity, profile, commands, and group joining are configured.
+- The standalone Telegram Apps Script web app, Telegram webhook, and one-minute `runScheduledTasks` maintenance trigger are active. Legacy polling is retained only as a recovery path after webhook removal.
+- The bot has administrator status. `Pin Messages` is the only selectable administrator right left enabled. Telegram shows `Change Group Info` as inherited from the group's member permissions and disables its switch in the bot editor. The bot code does not call group-edit APIs.
+- The local bot source and test harness support near-real-time webhook delivery, current-group activity tracking without message retention, pinned class notices, disabled-by-default welcomes, and the approved Telugu message envelope.
+- BotFather privacy mode is disabled. A private `/status` check returned through the webhook within seconds with the approved Telugu opening and bold closing.
+- Group-visible acceptance tests, announcements, and notices are deferred to avoid disrupting the live group.
 
 Reverify this section before relying on it in a later session because runtime and tracker state can change.
 
@@ -452,3 +500,6 @@ Reverify this section before relying on it in a later session because runtime an
 - GitHub Pages limits: https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits
 - Google Apps Script web apps: https://developers.google.com/apps-script/guides/web
 - Google Apps Script current-document scope: https://developers.google.com/apps-script/guides/services/authorization
+- Telegram bot tutorial: https://core.telegram.org/bots/tutorial
+- Telegram Bot API: https://core.telegram.org/bots/api
+- Telegram bot privacy mode: https://core.telegram.org/bots/features#privacy-mode

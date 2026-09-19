@@ -34,9 +34,10 @@ The current release candidate uses:
 - Markdown content collections and YAML site data
 - GitHub Actions and GitHub Pages for artifact-only publication
 - Google Apps Script and the organizer-owned Google Sheet for registration
+- a standalone Google Apps Script webhook service for the Telegram-only operations bot
 - Nimbalyst Plan and Tracker for work, dependencies, evidence, and approvals
 
-Public publication is controlled by Gate 3 in Nimbalyst. Do not publish, push a release, approve a gate, or enable GitHub Pages without explicit user approval.
+The website launch was approved and completed on September 17, 2026. New public releases still require explicit user instruction. Post-launch Telegram bot work is tracked separately and must not reopen or alter the completed website release.
 
 ## Non-negotiable project rules
 
@@ -45,6 +46,7 @@ Public publication is controlled by Gate 3 in Nimbalyst. Do not publish, push a 
 - Never publish a Telegram invite, username, phone number, email address, group detail, or other access method.
 - Telegram may appear only as the class platform. Use approved Telegram brand artifacts and retain the independent, unaffiliated statement.
 - Never put Google credentials, spreadsheet data, member details, or private contact information in source files, build output, logs, screenshots, commits, or documentation.
+- Never put a Telegram bot token, group identifier, invite link, enrollment code, raw update, or member data in source files, build output, logs, screenshots, commits, documentation, or Nimbalyst.
 - Registration data may go only to the approved organizer spreadsheet through the bound Apps Script web app.
 - Keep `research/`, root `content/`, `plan.md`, agent documentation, and tracker information out of `dist/`.
 - Add media only when publication permission is established. Preserve the approved 22-image community gallery unless the user changes the decision.
@@ -73,6 +75,15 @@ Public publication is controlled by Gate 3 in Nimbalyst. Do not publish, push a 
 - Base-path-safe URLs must use the existing URL helper and Astro configuration. GitHub project pages run under a repository base path.
 - The registration form posts directly to the Apps Script `/exec` endpoint stored only in `src/data/registration.ts`.
 - Backend changes start in `scripts/google-apps-script/Code.gs`, then must be copied, versioned, deployed, and tested in the bound Apps Script project.
+- Telegram bot changes start in `scripts/telegram-bot/Code.gs` and follow `scripts/telegram-bot/README.md`.
+- Keep the bot in a standalone Apps Script project. Do not bind it to the registration spreadsheet or add it to the Astro runtime.
+- Disable Telegram privacy mode only for `KVJ_MitraBot` so Telegram can deliver the approved group's latest updates to the webhook. The bot must ignore ordinary conversation and never store message text, history, names, or member profiles.
+- The group disables text messages for regular members. The bot therefore needs administrator status with `Pin Messages` as its only selectable administrator right. Disable message deletion, member management, bans, invites, member tags, stories, video chats, welcome messages, anonymous posting, administrator promotion, and every other selectable privilege. Telegram displays `Change Group Info` as inherited from the group's member permissions and disables its switch in the bot editor. The bot code must never call group-edit APIs.
+- Every Telegram message sent by the bot starts with `జై శ్రీ మన్నారాయణ🙏🙏` and ends with the bold signature `కృష్ణం వందే జగద్గురుం 🪷🪄📖`.
+- Keep automated welcomes disabled until the organizer explicitly enables them. Do not post group tests, announcements, or class notices during quiet setup.
+- The bot handles operations only. The existing Translator bot retains translation responsibility.
+- Treat `research/telegram-group-findings.md` as the single Telegram discovery record. Add dated refresh sections there.
+- Live Telegram activation is complete. The webhook, one-minute maintenance trigger, privacy-mode change, minimal selectable pin-only administrator role, and private `/status` check were verified on September 19, 2026. Group-visible acceptance messages remain deferred until the organizer chooses to publish them.
 
 ## Nimbalyst operating model
 
@@ -125,6 +136,8 @@ Validate Apps Script syntax after backend changes:
 
 ```bash
 node --check < scripts/google-apps-script/Code.gs
+node --check < scripts/telegram-bot/Code.gs
+npm run test:telegram-bot
 ```
 
 Scan human-facing repository text for prohibited dash characters:
@@ -141,6 +154,7 @@ A change is ready for review when:
 - `npm run build` passes the Astro build, privacy check, and internal-link check.
 - The GitHub project-page build passes when routes, assets, or links changed.
 - Apps Script syntax and a labeled end-to-end test pass when the backend changed.
+- Telegram bot changes pass the bot test harness, syntax check, Apps Script activation checks, and labeled group verification.
 - Telugu and English behavior remain consistent where the feature is bilingual.
 - No private data or internal material enters `dist/`.
 - The relevant Nimbalyst tracker item contains current evidence and retains the correct approval state.
@@ -153,5 +167,6 @@ A change is ready for review when:
 - Delivery plan and gates: `plan.md`
 - Maintainer guide: `README.md`
 - Registration backend source: `scripts/google-apps-script/Code.gs`
+- Telegram bot source and runbook: `scripts/telegram-bot/`
 - Registration endpoint source: `src/data/registration.ts`
 - Deployment workflow: `.github/workflows/deploy.yml`
